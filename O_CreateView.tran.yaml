@@ -1,0 +1,49 @@
+type: "transformation"
+version: "1.0"
+pipeline:
+  components:
+    Create View:
+      type: "create-view"
+      sources:
+      - "DIM_CUSTOMER_SCD3"
+      parameters:
+        componentName: "Create View"
+        database: "[Environment Default]"
+        schema: "[Environment Default]"
+        viewName: "v_github"
+        secureView: "No"
+        viewType: "Standard"
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+    DIM_CUSTOMER_SCD3:
+      type: "table-input"
+      parameters:
+        componentName: "DIM_CUSTOMER_SCD3"
+        database: "[Environment Default]"
+        schema: "[Environment Default]"
+        targetTable: "DIM_CUSTOMER_SCD3"
+        columnNames:
+        - "CUSTOMER_KEY"
+        - "SRC_CUSTOMER_ID"
+        - "CUSTOMER_NAME"
+        - "EMAIL"
+        - "CURRENT_CITY"
+        - "PREVIOUS_CITY"
+        - "CURRENT_CITY_START_DT"
+        - "PREVIOUS_CITY_START_DT"
+        - "PREVIOUS_CITY_END_DT"
+        - "SNAPSHOT_DATE"
+        timeOffset:
+design:
+  components:
+    Create View:
+      position:
+        x: 70
+        "y": -280
+      tempMetlId: 1
+    DIM_CUSTOMER_SCD3:
+      position:
+        x: -90
+        "y": -270
+      tempMetlId: 2
